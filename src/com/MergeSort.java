@@ -12,18 +12,17 @@ public class MergeSort {
         for (int i = start; i <end ; i++) {
             temp[i]=a[i];
         }
-        int midIndex = mid+1;
-        while(start<=mid && midIndex <= end){
-            if(temp[start] <= temp[midIndex]){
-                a[start]=temp[start++];
+        for (int i = start; i < end ; i++) {
+            if(start >= mid){
+                a[i] = temp[mid++];
+            }else if(mid>end){
+                a[i] = temp[start++];
+            }else if(temp[start]< temp[mid]){
+                a[i] = temp[start++];
             }else{
-                a[start] = temp[midIndex++];
+                a[i] = temp[mid++];
             }
         }
-        while(start <= mid ){
-
-        }
-
     }
 
     public static void sort(int[] a, int st,int end){
@@ -40,7 +39,7 @@ public class MergeSort {
         int[] a = {6,1,9,3,0,2,5};
         System.out.println(Arrays.toString(a));
         temp = new int[a.length];
-        sort(a,0,a.length-1);
-        System.out.println(a);
+        sort(a,0,a.length);
+        System.out.println(Arrays.toString(a));
     }
 }
