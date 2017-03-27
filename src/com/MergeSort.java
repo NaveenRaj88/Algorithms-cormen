@@ -1,5 +1,7 @@
 package com;
 
+import com.utils.ArrayGenerator;
+
 import java.util.Arrays;
 
 /**
@@ -8,38 +10,58 @@ import java.util.Arrays;
 public class MergeSort {
 
     static int[] temp;
-    public static void merge(int[] a, int start, int mid, int end){
-        for (int i = start; i <end ; i++) {
-            temp[i]=a[i];
+
+    private static void merge(int[] a, int st, int mid, int end) {
+        for (int i = st; i <= end; i++) {
+            temp[i] = a[i];
         }
-        for (int i = start; i < end ; i++) {
-            if(start >= mid){
-                a[i] = temp[mid++];
-            }else if(mid>end){
-                a[i] = temp[start++];
-            }else if(temp[start]< temp[mid]){
-                a[i] = temp[start++];
-            }else{
-                a[i] = temp[mid++];
+        int i = st;
+        int j = mid + 1;
+//        int k = st;
+//
+//        while(i<= mid && j <= end){
+//            if(temp[i] <= temp[j]){
+//                a[k++] = temp[i++];
+//            }else{
+//                a[k++] = temp[j++];
+//            }
+//        }
+//
+//        while(i<= mid){
+//            a[k++] = temp[i++];
+//        }
+//        while(j<= end){
+//            a[k++] = temp[j++];
+//        }
+
+        for (int k = st; k <= end; k++) {
+            if (i > mid) {
+                a[k] = temp[j++];
+            } else if (j > end) {
+                a[k] = temp[i++];
+            } else if (temp[i] < temp[j]) {
+                a[k] = temp[i++];
+            } else {
+                a[k] = temp[j++];
             }
         }
     }
 
-    public static void sort(int[] a, int st,int end){
-        if(st< end){
-            int  mid = (end+st)/2;
-            sort(a,st,mid);
-            sort(a,mid+1,end);
-            merge(a,st,mid,end);
+    public static void mergeSort(int[] a, int st, int end) {
+        if (st < end) {
+            int mid = st + (end - st) / 2;
+            mergeSort(a, st, mid);
+            mergeSort(a, mid + 1, end);
+            merge(a, st, mid, end);
         }
 
     }
 
     public static void main(String[] args) {
-        int[] a = {6,1,9,3,0,2,5};
+        int[] a = ArrayGenerator.generateArray(10, 5);
         System.out.println(Arrays.toString(a));
         temp = new int[a.length];
-        sort(a,0,a.length);
+        mergeSort(a, 0, a.length - 1);
         System.out.println(Arrays.toString(a));
     }
 }
