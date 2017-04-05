@@ -1,4 +1,4 @@
-package com;
+package com.chap2;
 
 import java.util.Arrays;
 

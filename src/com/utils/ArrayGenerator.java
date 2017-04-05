@@ -26,4 +26,12 @@ public class ArrayGenerator {
         return arr;
     }
 
+    public static int[][] generateMatrixArray(int rows, int col){
+        int[][] matrix = new int[rows][col];
+        for (int i = 0; i <rows ; i++) {
+            matrix[i] = generateArray(col, 10);
+        }
+        return matrix;
+    }
+
 }
